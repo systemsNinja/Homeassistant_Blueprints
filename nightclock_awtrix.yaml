@@ -15,7 +15,7 @@ blueprint:
 
     ### Prerequisites
 
-    AWTRIX v0.72
+    AWTRIX v0.72+
 
   domain: automation
   input:
@@ -135,6 +135,13 @@ blueprint:
         color_rgb:
       default: [255, 255, 255]
 
+    wakeup_settings_calendar_header_color:
+      name: Color setting for the day mode calendar header
+      description: This setting allows you to change the color of the day mode calendar header.
+      selector:
+        color_rgb:
+      default: [255, 255, 0]
+
     wakeup_settings_calendar_color:
       name: Color setting for the day mode calendar
       description: This setting allows you to change the color of the day mode calendar.
@@ -176,19 +183,19 @@ blueprint:
       description: >
         Select the time/calendar style
 
-          ![](https://raw.githubusercontent.com/RDG88/Homeassistant_Blueprints/main/thumbnails/tmode-0.svg) `Style 0`   
+          ![](https://raw.githubusercontent.com/RDG88/Homeassistant_Blueprints/main/thumbnails/tmode-0.svg) `Style 0`   
 
           ---
 
-          ![](https://raw.githubusercontent.com/RDG88/Homeassistant_Blueprints/main/thumbnails/tmode-1.svg) `Style 1`   
+          ![](https://raw.githubusercontent.com/RDG88/Homeassistant_Blueprints/main/thumbnails/tmode-1.svg) `Style 1`   
 
           ---
 
-          ![](https://raw.githubusercontent.com/RDG88/Homeassistant_Blueprints/main/thumbnails/tmode-2.svg) `Style 2`   
+          ![](https://raw.githubusercontent.com/RDG88/Homeassistant_Blueprints/main/thumbnails/tmode-2.svg) `Style 2`   
 
           ---
 
-          ![](https://raw.githubusercontent.com/RDG88/Homeassistant_Blueprints/main/thumbnails/tmode-3.svg) `Style 3`   
+          ![](https://raw.githubusercontent.com/RDG88/Homeassistant_Blueprints/main/thumbnails/tmode-3.svg) `Style 3`   
 
           ---
 
@@ -250,6 +257,7 @@ variables:
   wakeup_settings_bri: !input wakeup_settings_bri
   wakeup_settings_abri: !input wakeup_settings_abri
   wakeup_calendar_style: !input wakeup_calendar_style
+  wakeup_settings_calendar_header_color: !input wakeup_settings_calendar_header_color
   wakeup_settings_calendar_color: !input wakeup_settings_calendar_color
   wakeup_settings_calendar_text_color: !input wakeup_settings_calendar_text_color
   wakeup_inactive_weekday_maker_color: !input wakeup_inactive_weekday_maker_color
@@ -275,18 +283,19 @@ variables:
       "TMODE": 0,
       "TFORMAT": "{{ sleep_time_format }}",
       "WD": {{ sleep_weekday_bar | lower }},
-      "TIME_COL": {{ sleep_settings_color }}
+      "TCOL": {{ sleep_settings_color }}
     }
   payload_wakeup_settings: >-
     { "ATRANS": {{ wakeup_settings_atrans | lower }}, 
       "BRI": {{ wakeup_settings_bri }}, 
       "ABRI": {{ wakeup_settings_abri | lower }},
-      "CHCOL": {{ wakeup_settings_calendar_color }},
+      "CHCOL": {{ wakeup_settings_calendar_header_color }},
+      "CCCOL": {{ wakeup_settings_calendar_color }},
       "CTCOL": {{ wakeup_settings_calendar_text_color }},
       "TMODE": {{ wakeup_calendar_style }},
       "TFORMAT": "{{ wakeup_time_format }}",
       "WD": {{ wakeup_weekday_bar | lower }},
-      "TIME_COL": {{ wakeup_settings_color }},
+      "TCOL": {{ wakeup_settings_color }},
       "WDCA": {{ wakeup_active_weekday_maker_color }},
       "WDCI": {{ wakeup_inactive_weekday_maker_color }}
     }
